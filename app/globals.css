@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F3EFEE;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #F3EFEE;
+    --foreground: #543F3A;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  overflow-x: hidden;
+}
+
+/* Display family */
+/* SF Pro Display Medium (global body font) */
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/SF-Pro-Display-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/SF-Pro-Display-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/SF-Pro-Display-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Text family (light italic) */
+@font-face {
+  font-family: "SF Pro Text";
+  src: url("/fonts/SF-Pro-Text-LightItalic.otf") format("opentype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+.tablet-mobile-view::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -50vw;
+  width: 150vw;
+  height: 367px;
+  background-color: #ECE3E0;
+  z-index: -1;
+}
+
+.ilustration-holder {
+  top: -420px;
+}
+
+.pricing-box1, .pricing-box3 {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.pricing-box2 {
+  background-color: #F3EFEE;
+}
+
+.pricing-box1::after,
+.pricing-box3::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -50px;
+  width: 50px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: -1;
+}
+
+.pricing-box3::after {
+  right: auto;
+  left: -50px;
+}
+
+.testimonial-card-text {
+  font-family: "SF Pro Text";
+}
+
+.swiper {
+  overflow: visible !important;
+}
+
+.swiper-wrapper {
+  overflow: visible !important;
+}
+
+.swiper-horizontal > .swiper-scrollbar, .swiper-scrollbar.swiper-scrollbar-horizontal {
+  bottom: -24px !important;
+  opacity: 1 !important;
+}
+
+.swiper-scrollbar {
+  background-color: #D9D9D9 !important;
+  height: 8px !important;
+  border-radius: 44px !important;
+}
+
+.swiper-scrollbar-drag {
+  background-color: #543F3A !important;
+  height: 8px !important;
+  border-radius: 44px !important;
+}
+
+@media (min-width: 1024px) {
+  .testimonials-swiper .swiper-slide {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .testimonials-swiper .swiper-slide-active,
+  .testimonials-swiper .swiper-slide-next,
+  .testimonials-swiper .swiper-slide-prev {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@media (min-width: 1139px) {
+  .ilustration-holder {
+    top: -380px;
+  }
+}
+
+@media (min-width: 1189px) {
+  .ilustration-holder {
+    top: -220px;
+  }
+}
+
+@media (min-width: 1094px) and (max-width: 1280px) {
+  .why-section {
+    margin-top: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .tablet-mobile-view::before {
+    height: 185px;
+    bottom: -20px;
+  }
+}
+
+@media (max-width: 639.99px) {
+  .our-socials-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
