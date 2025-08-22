@@ -17,8 +17,8 @@ export default function Home() {
       <WhySection />
       <PricingSection />
       <Testimonials />
-      <OurSocialsSection />
       <VideoLib />
+      <OurSocialsSection />
       <ContactSection />
     </>
   );

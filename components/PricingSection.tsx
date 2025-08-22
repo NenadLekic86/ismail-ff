@@ -8,13 +8,18 @@ import Image from "next/image";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function PricingSection() {
-    const [activePlan, setActivePlan] = useState<"basic" | "premium" | "professional">("basic");
+    const [activePlan, setActivePlan] = useState<"basic" | "premium" | "professional">("premium");
     const mobileContentRef = useRef<HTMLDivElement | null>(null);
     const tabsRef = useRef<HTMLDivElement | null>(null);
     const indicatorRef = useRef<HTMLDivElement | null>(null);
     const btnBasicRef = useRef<HTMLButtonElement | null>(null);
     const btnPremiumRef = useRef<HTMLButtonElement | null>(null);
     const btnProfessionalRef = useRef<HTMLButtonElement | null>(null);
+    const desktopTabsRef = useRef<HTMLDivElement | null>(null);
+    const desktopIndicatorRef = useRef<HTMLDivElement | null>(null);
+    const boxBasicRef = useRef<HTMLDivElement | null>(null);
+    const boxPremiumRef = useRef<HTMLDivElement | null>(null);
+    const boxProfessionalRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
         const el = mobileContentRef.current;
@@ -48,6 +53,46 @@ export default function PricingSection() {
             cancelAnimationFrame(id);
             window.removeEventListener("resize", onResize);
         };
+    }, [activePlan]);
+
+    // Desktop: animate moving highlight indicator behind active pricing box
+    useEffect(() => {
+        const moveIndicator = () => {
+            const container = desktopTabsRef.current;
+            const indicator = desktopIndicatorRef.current;
+            if (!container || !indicator) return;
+            const target = activePlan === "basic" ? boxBasicRef.current : activePlan === "premium" ? boxPremiumRef.current : boxProfessionalRef.current;
+            if (!target) return;
+            const cRect = container.getBoundingClientRect();
+            const tRect = target.getBoundingClientRect();
+            const left = tRect.left - cRect.left;
+            const top = tRect.top - cRect.top;
+            const width = tRect.width;
+            const height = tRect.height;
+            gsap.to(indicator, { x: left, y: top, width, height, duration: 0.3, ease: "power2.out" });
+        };
+
+        const id = requestAnimationFrame(moveIndicator);
+        const onResize = () => moveIndicator();
+        window.addEventListener("resize", onResize);
+        return () => {
+            cancelAnimationFrame(id);
+            window.removeEventListener("resize", onResize);
+        };
+    }, [activePlan]);
+
+    // Reset to basic on mobile view
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 1024 && activePlan !== "basic") {
+                setActivePlan("basic");
+            } else if (window.innerWidth >= 1024 && activePlan === "basic") {
+                setActivePlan("premium");
+            }
+        };
+        
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
     }, [activePlan]);
 
     const Row = ({ label, value, isCheck, isUncheck }: { label: string; value?: string; isCheck?: boolean; isUncheck?: boolean }) => (
@@ -84,12 +129,13 @@ export default function PricingSection() {
                     </div>
                 </div>
                 <div className="basis-3/4">
-                    <div className="flex flex-row items-start justify-start text-center">
-                        <div className="pricing-box1 relative basis-1/3 p-10 rounded-l-[26px]">
+                    <div ref={desktopTabsRef} className="relative flex flex-row items-start justify-start text-center">
+                        <div ref={desktopIndicatorRef} className="absolute rounded-[26px] border-2 border-black bg-[#F3EFEE] pointer-events-none" style={{ left: 0, top: 0, width: 0, height: 0 }} />
+                        <div ref={boxBasicRef} onClick={() => setActivePlan("basic")} className={`relative z-10 basis-1/3 cursor-pointer transition-all duration-300 ${activePlan === "basic" ? "p-12 -mt-3 bg-[#F3EFEE] border-2 border-black rounded-[26px]" : "p-10 bg-white/50 border-2 border-[#F9F7F7] rounded-0"}`}>
                             <div className="flex flex-col items-start justify-start">
                                 <div className="text-center mx-auto">
-                                    <h3 className="text-3xl font-medium mb-6">Current</h3>
-                                    <h3 className="text-2xl font-medium mb-4 pb-2 border-b border-black">Basic</h3>
+                                    <h3 className="text-3xl font-medium mb-6">Free</h3>
+                                    <h3 className={`text-2xl mb-4 pb-2 border-b border-black plan_type ${activePlan === "basic" ? "font-bold" : "font-medium"}`}>Basic</h3>
                                     <p className="text-base mb-4 min-h-[24px]">5 score limit</p>
                                     <p className="text-[18px] mb-4 min-h-[24px]">1</p>
                                     <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
@@ -101,11 +147,11 @@ export default function PricingSection() {
                                 </div>
                             </div>
                         </div>
-                        <div className="pricing-box2 relative basis-1/3 p-12 -mt-3 bg-[#F3EFEE] border-2 border-black rounded-[26px]">
+                        <div ref={boxPremiumRef} onClick={() => setActivePlan("premium")} className={`relative z-10 basis-1/3 cursor-pointer transition-all duration-300 ${activePlan === "premium" ? "p-12 -mt-3 bg-[#F3EFEE] border-2 border-black rounded-[26px]" : "p-10 bg-white/50 border-2 border-[#F9F7F7] rounded-0"}`}>
                             <div className="flex flex-col items-start justify-start">
                                 <div className="text-center mx-auto">
                                     <h3 className="text-4xl font-medium mb-6">$4.99/<span className="text-base">month</span></h3>
-                                    <h3 className="text-2xl font-bold mb-4 pb-2 border-b border-black">Premium</h3>
+                                    <h3 className={`text-2xl mb-4 pb-2 border-b border-black plan_type ${activePlan === "premium" ? "font-bold" : "font-medium"}`}>Premium</h3>
                                     <p className="text-base mb-4 min-h-[24px]">50</p>
                                     <p className="text-base mb-4 min-h-[24px]">Unlimited</p>
                                     <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
@@ -117,11 +163,11 @@ export default function PricingSection() {
                                 </div>
                             </div>
                         </div>
-                        <div className="pricing-box3 relative basis-1/3 p-10 rounded-r-[26px]">
+                        <div ref={boxProfessionalRef} onClick={() => setActivePlan("professional")} className={`relative z-10 basis-1/3 cursor-pointer transition-all duration-300 ${activePlan === "professional" ? "p-12 -mt-3 bg-[#F3EFEE] border-2 border-black rounded-[26px]" : "p-10 bg-white/50 border-2 border-[#F9F7F7] rounded-0"}`}>
                             <div className="flex flex-col items-start justify-start">
                                 <div className="text-center mx-auto">
                                     <h3 className="text-4xl font-medium mb-6">$9.99/<span className="text-base">month</span></h3>
-                                    <h3 className="text-2xl font-medium mb-4 pb-2 border-b border-black">Professional</h3>
+                                    <h3 className={`text-2xl mb-4 pb-2 border-b border-black plan_type ${activePlan === "professional" ? "font-bold" : "font-medium"}`}>Professional</h3>
                                     <p className="text-base mb-4 min-h-[24px]">200</p>
                                     <p className="text-base mb-4 min-h-[24px]">Unlimited</p>
                                     <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
@@ -161,7 +207,7 @@ export default function PricingSection() {
                 <div ref={mobileContentRef} className="rounded-[16px] p-10 bg-[#F9F7F6]">
                     {activePlan === "basic" && (
                         <div>
-                            <h3 className="text-3xl font-medium mb-6 text-center">Current</h3>
+                            <h3 className="text-3xl font-medium mb-6 text-center">Free</h3>
                             <h3 className="text-2xl font-semibold mb-3 text-center">Basic</h3>
                             <hr className="border-black mb-2 max-w-[40%] mx-auto" />
                             <Row label="Scores" value="5 score limit" />
@@ -177,7 +223,7 @@ export default function PricingSection() {
 
                     {activePlan === "premium" && (
                         <div>
-                            <h3 className="text-3xl font-medium mb-6 text-center">Current</h3>
+                            <h3 className="text-3xl font-medium mb-6 text-center">$4.99/<span className="text-base">month</span></h3>
                             <h3 className="text-2xl font-semibold mb-3 text-center">Premium</h3>
                             <hr className="border-black mb-2 max-w-[40%] mx-auto" />
                             <Row label="Scores" value="50" />
@@ -193,7 +239,7 @@ export default function PricingSection() {
 
                     {activePlan === "professional" && (
                         <div>
-                            <h3 className="text-3xl font-medium mb-6 text-center">Current</h3>
+                            <h3 className="text-3xl font-medium mb-6 text-center">$9.99/<span className="text-base">month</span></h3>
                             <h3 className="text-2xl font-semibold mb-3 text-center">Professional</h3>
                             <hr className="border-black mb-2 max-w-[40%] mx-auto" />
                             <Row label="Scores" value="200" />

@@ -11,7 +11,7 @@ import { Scrollbar, Grid } from 'swiper/modules';
 
 export default function OurSocialsSection() {
     return (
-        <section className="our-socials-section mx-auto relative">
+        <section className="our-socials-section mx-auto max-w-7xl px-4 sm:px-6 relative">
             <h2 className="text-4xl md:text-5xl font-semibold text-center mb-10">Our Socials</h2>
 
             <div className="our-socials-container relative">

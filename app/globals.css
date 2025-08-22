@@ -75,30 +75,7 @@ body {
   top: -420px;
 }
 
-.pricing-box1, .pricing-box3 {
-  background-color: rgba(255, 255, 255, 0.5);
-}
 
-.pricing-box2 {
-  background-color: #F3EFEE;
-}
-
-.pricing-box1::after,
-.pricing-box3::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: -50px;
-  width: 50px;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.5);
-  z-index: -1;
-}
-
-.pricing-box3::after {
-  right: auto;
-  left: -50px;
-}
 
 .testimonial-card-text {
   font-family: "SF Pro Text";
@@ -150,7 +127,29 @@ body {
   }
 }
 
-@media (min-width: 1189px) {
+@media (min-width: 1189px) and (max-width: 1279px) {
+  .ilustration-holder {
+    top: -410px;
+  }
+  .ilustration-holder-inner {
+    max-width: 90vw;
+  }
+}
+
+@media (min-width: 1091px) and (max-width: 1138px) {
+  .fifth-svg-content {
+    margin-top: 20rem !important;
+  }
+}
+
+@media (min-width: 1139px) and (max-width: 1279px) {
+  .fifth-svg-content {
+    margin-top: 25rem !important;
+  }
+}
+
+
+@media (min-width: 1280px) {
   .ilustration-holder {
     top: -220px;
   }
@@ -158,7 +157,7 @@ body {
 
 @media (min-width: 1094px) and (max-width: 1280px) {
   .why-section {
-    margin-top: 50%;
+    margin-top: 30%;
   }
 }
 

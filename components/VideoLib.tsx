@@ -10,7 +10,7 @@ import 'swiper/css';
 
 export default function VideoLib() {
     return (
-        <section className="video-lib-section mx-auto max-w-7xl px-4 sm:px-6 my-20 md:my-44 relative">
+        <section className="video-lib-section mx-auto max-w-7xl px-4 sm:px-6 mt-32 mb-20 md:my-40 relative">
             <h2 className="text-4xl md:text-5xl font-semibold text-center md:text-start mb-10 md:hidden">Video Library Highlight</h2>
 
             {/* Tablet/Desktop View */}
