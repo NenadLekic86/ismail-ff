@@ -138,7 +138,7 @@ export default function PricingSection() {
                 <div className="basis-1/4 p-10">
                     <div className="flex flex-col items-start justify-start">
                         <h3 className="text-3xl font-medium mb-6">Price</h3>
-                        <h3 className="text-3xl font-medium mb-4 pb-2 border-b border-black">Features</h3>
+                        <h3 className="text-3xl font-medium mb-4 pb-2 border-b border-[#543F3A]">Features</h3>
                         <p className="text-base mb-4 min-h-[24px]">Scores</p>
                         <p className="text-base mb-4 min-h-[24px]">Events</p>
                         <p className="text-base mb-4 min-h-[24px]">Online sync</p>
@@ -151,12 +151,12 @@ export default function PricingSection() {
                 </div>
                 <div className="basis-3/4">
                     <div ref={desktopTabsRef} className="relative flex flex-row items-start justify-start text-center">
-                        <div ref={desktopIndicatorRef} className="absolute rounded-[26px] border-2 border-black bg-[#F3EFEE] pointer-events-none" style={{ left: 0, top: 0, width: 0, height: 0 }} />
-                        <div ref={boxBasicRef} onClick={() => setActivePlan("basic")} className={`relative z-10 basis-1/3 cursor-pointer transition-all duration-300 ${activePlan === "basic" ? "p-12 -mt-3 bg-[#F3EFEE] border-2 border-black rounded-[26px]" : "p-10 bg-white/50 border-2 border-[#F9F7F7] rounded-0"}`}>
+                        <div ref={desktopIndicatorRef} className="absolute rounded-[26px] border-2 border-[#543F3A] bg-[#F3EFEE] pointer-events-none" style={{ left: 0, top: 0, width: 0, height: 0 }} />
+                        <div ref={boxBasicRef} onClick={() => setActivePlan("basic")} className={`relative z-10 basis-1/3 cursor-pointer transition-all duration-300 ${activePlan === "basic" ? "p-12 -mt-3 bg-[#F3EFEE] border-2 border-[#543F3A] rounded-[26px]" : "p-10 bg-white/50 border-2 border-[#F9F7F7] rounded-0"}`}>
                             <div className="flex flex-col items-start justify-start">
                                 <div className="text-center mx-auto">
                                     <h3 className="text-3xl font-medium mb-6">Free</h3>
-                                    <h3 className={`text-2xl mb-4 pb-2 border-b border-black plan_type ${activePlan === "basic" ? "font-bold" : "font-medium"}`}>Basic</h3>
+                                    <h3 className={`text-2xl mb-4 pb-2 border-b border-[#543F3A] plan_type ${activePlan === "basic" ? "font-bold" : "font-medium"}`}>Basic</h3>
                                     <p className="text-base mb-4 min-h-[24px]">5 score limit</p>
                                     <p className="text-[18px] mb-4 min-h-[24px]">1</p>
                                     <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
@@ -168,11 +168,11 @@ export default function PricingSection() {
                                 </div>
                             </div>
                         </div>
-                        <div ref={boxPremiumRef} onClick={() => setActivePlan("premium")} className={`relative z-10 basis-1/3 cursor-pointer transition-all duration-300 ${activePlan === "premium" ? "p-12 -mt-3 bg-[#F3EFEE] border-2 border-black rounded-[26px]" : "p-10 bg-white/50 border-2 border-[#F9F7F7] rounded-0"}`}>
+                        <div ref={boxPremiumRef} onClick={() => setActivePlan("premium")} className={`relative z-10 basis-1/3 cursor-pointer transition-all duration-300 ${activePlan === "premium" ? "p-12 -mt-3 bg-[#F3EFEE] border-2 border-[#543F3A] rounded-[26px]" : "p-10 bg-white/50 border-2 border-[#F9F7F7] rounded-0"}`}>
                             <div className="flex flex-col items-start justify-start">
                                 <div className="text-center mx-auto">
                                     <h3 className="text-4xl font-medium mb-6">$4.99/<span className="text-base">month</span></h3>
-                                    <h3 className={`text-2xl mb-4 pb-2 border-b border-black plan_type ${activePlan === "premium" ? "font-bold" : "font-medium"}`}>Premium</h3>
+                                    <h3 className={`text-2xl mb-4 pb-2 border-b border-[#543F3A] plan_type ${activePlan === "premium" ? "font-bold" : "font-medium"}`}>Premium</h3>
                                     <p className="text-base mb-4 min-h-[24px]">50</p>
                                     <p className="text-base mb-4 min-h-[24px]">Unlimited</p>
                                     <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
@@ -184,11 +184,11 @@ export default function PricingSection() {
                                 </div>
                             </div>
                         </div>
-                        <div ref={boxProfessionalRef} onClick={() => setActivePlan("professional")} className={`relative z-10 basis-1/3 cursor-pointer transition-all duration-300 ${activePlan === "professional" ? "p-12 -mt-3 bg-[#F3EFEE] border-2 border-black rounded-[26px]" : "p-10 bg-white/50 border-2 border-[#F9F7F7] rounded-0"}`}>
+                        <div ref={boxProfessionalRef} onClick={() => setActivePlan("professional")} className={`relative z-10 basis-1/3 cursor-pointer transition-all duration-300 ${activePlan === "professional" ? "p-12 -mt-3 bg-[#F3EFEE] border-2 border-[#543F3A] rounded-[26px]" : "p-10 bg-white/50 border-2 border-[#F9F7F7] rounded-0"}`}>
                             <div className="flex flex-col items-start justify-start">
                                 <div className="text-center mx-auto">
                                     <h3 className="text-4xl font-medium mb-6">$9.99/<span className="text-base">month</span></h3>
-                                    <h3 className={`text-2xl mb-4 pb-2 border-b border-black plan_type ${activePlan === "professional" ? "font-bold" : "font-medium"}`}>Professional</h3>
+                                    <h3 className={`text-2xl mb-4 pb-2 border-b border-[#543F3A] plan_type ${activePlan === "professional" ? "font-bold" : "font-medium"}`}>Professional</h3>
                                     <p className="text-base mb-4 min-h-[24px]">200</p>
                                     <p className="text-base mb-4 min-h-[24px]">Unlimited</p>
                                     <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
@@ -230,7 +230,7 @@ export default function PricingSection() {
                         <div>
                             <h3 className="text-3xl font-medium mb-6 text-center">Free</h3>
                             <h3 className="text-2xl font-semibold mb-3 text-center">Basic</h3>
-                            <hr className="border-black mb-2 max-w-[40%] mx-auto" />
+                            <hr className="border-[#543F3A] mb-2 max-w-[40%] mx-auto" />
                             <Row label="Scores" value="5 score limit" />
                             <Row label="Events" value="1" />
                             <Row label="Online sync" isCheck />
@@ -246,7 +246,7 @@ export default function PricingSection() {
                         <div>
                             <h3 className="text-3xl font-medium mb-6 text-center">$4.99/<span className="text-base">month</span></h3>
                             <h3 className="text-2xl font-semibold mb-3 text-center">Premium</h3>
-                            <hr className="border-black mb-2 max-w-[40%] mx-auto" />
+                            <hr className="border-[#543F3A] mb-2 max-w-[40%] mx-auto" />
                             <Row label="Scores" value="50" />
                             <Row label="Events" value="Unlimited" />
                             <Row label="Online sync" isCheck />
@@ -262,7 +262,7 @@ export default function PricingSection() {
                         <div>
                             <h3 className="text-3xl font-medium mb-6 text-center">$9.99/<span className="text-base">month</span></h3>
                             <h3 className="text-2xl font-semibold mb-3 text-center">Professional</h3>
-                            <hr className="border-black mb-2 max-w-[40%] mx-auto" />
+                            <hr className="border-[#543F3A] mb-2 max-w-[40%] mx-auto" />
                             <Row label="Scores" value="200" />
                             <Row label="Events" value="Unlimited" />
                             <Row label="Online sync" isCheck />
