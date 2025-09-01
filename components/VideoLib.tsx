@@ -130,7 +130,7 @@ export default function VideoLib() {
                     </SwiperSlide>
                 </Swiper>
 
-                <div className="video-lib-content mt-6">
+                <div className="video-lib-content mt-6 text-center">
                     <ButtonLink href="#" className="min-w-[185px]">
                         See More
                     </ButtonLink>

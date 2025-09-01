@@ -6,6 +6,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import Image from "next/image";
 
+// Mobile detection utility
+const isMobile = () => {
+  if (typeof window === 'undefined') return false;
+  return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+};
+
 gsap.registerPlugin(ScrollTrigger);
 
 
@@ -103,13 +109,14 @@ export default function AnimatedSection() {
     });
 
     const ctx = gsap.context(() => {
+      const mobile = isMobile();
       const tl = gsap.timeline({
         defaults: { ease: "none" },
         scrollTrigger: {
           trigger: svg,
-          start: "top 45%", // begin after user scrolls the SVG into view a bit
+          start: "top 50%", // begin after user scrolls the SVG into view a bit
           end: "+=200%", // shorter range so it completes within the section
-          scrub: 1.3,
+          scrub: mobile ? 2.5 : 0.6, // faster stop on desktop, slower scrub on mobile
           invalidateOnRefresh: true,
         },
       });
@@ -117,7 +124,8 @@ export default function AnimatedSection() {
       // Reveal sequentially from top to bottom
       paths.forEach((path) => {
         const isVector3Segment = path.id.startsWith("Vector_3_");
-        const segDuration = isVector3Segment ? 0.16 : 0.32; // restore previous speed
+        const baseDuration = isVector3Segment ? 0.16 : 0.32;
+        const segDuration = mobile ? baseDuration * 1.8 : baseDuration; // 80% slower on mobile
         tl.to(path, { strokeDashoffset: 0, duration: segDuration, ease: "none" });
       });
 
@@ -125,7 +133,7 @@ export default function AnimatedSection() {
       if (g2Element) {
         gsap.to(g2Element, {
           opacity: 1,
-          duration: 3,
+          duration: mobile ? 5 : 3, // slower fade-in on mobile
           ease: "power1.out",
           scrollTrigger: {
             trigger: svg,
@@ -189,7 +197,7 @@ export default function AnimatedSection() {
           paused: true,
         });
         ordered.forEach((path) => {
-          tl.to(path, { strokeDashoffset: 0, duration: 1.5, ease: "none" }); // slower on mobile
+          tl.to(path, { strokeDashoffset: 0, duration: 2.5, ease: "none" }); // much slower on mobile
         });
 
         // If this is the mobile SVG that contains the additional masked group, fade it in on viewport entry
@@ -199,7 +207,7 @@ export default function AnimatedSection() {
             maskedGroup.style.opacity = "0";
             gsap.to(maskedGroup, {
               opacity: 1,
-              duration: 4,
+              duration: 6, // slower fade-in for mobile illustrations
               ease: "power1.out",
               scrollTrigger: {
                 trigger: svg,
@@ -316,7 +324,7 @@ export default function AnimatedSection() {
             <div className="flex flex-col lg:flex-row align-center">
                 <div className="basis-full lg:basis-3/5 order-2 lg:order-1">
                     <h2 className="text-4xl md:text-5xl font-semibold mb-4 hidden lg:block">
-                        Collaborative Playlists - collaboration and <br/> sharing
+                      Collaboration
                     </h2>
                     <p className="text-lg mb-4 md:pr-40">Lorem ipsum dolor sit amet consectetur. Molestie placerat justo aliquet tellus felis ornare dignissim sapien. Urna sed enim neque neque urna varius diam vitae. Tortor vel nunc quis urna metus feugiat leo proin.</p>
                     <Link href="/" className="flex items-center gap-2">

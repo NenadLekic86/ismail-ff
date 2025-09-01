@@ -81,12 +81,11 @@ export default function PricingSection() {
         };
     }, [activePlan]);
 
-    // Reset to basic on mobile view
+    // Always reset to premium on mobile view (changed from basic to premium)
     useEffect(() => {
         const handleResize = () => {
-            if (window.innerWidth < 1024 && activePlan !== "basic") {
-                setActivePlan("basic");
-            } else if (window.innerWidth >= 1024 && activePlan === "basic") {
+            // Always reset to premium regardless of screen size
+            if (activePlan !== "premium") {
                 setActivePlan("premium");
             }
         };
@@ -94,6 +93,28 @@ export default function PricingSection() {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, [activePlan]);
+
+    // Reset to premium when section comes into view or on page load
+    useEffect(() => {
+        // Always start with premium on component mount (page refresh)
+        setActivePlan("premium");
+
+        // Create ScrollTrigger to reset to premium when section comes into view
+        const scrollTrigger = ScrollTrigger.create({
+            trigger: ".pricing-section",
+            start: "top 80%",
+            onEnter: () => {
+                setActivePlan("premium");
+            },
+            onEnterBack: () => {
+                setActivePlan("premium");
+            },
+        });
+
+        return () => {
+            scrollTrigger.kill();
+        };
+    }, []); // Empty dependency array - only run once on mount
 
     const Row = ({ label, value, isCheck, isUncheck }: { label: string; value?: string; isCheck?: boolean; isUncheck?: boolean }) => (
         <div className="flex items-center justify-between py-3">

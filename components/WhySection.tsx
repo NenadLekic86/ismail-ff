@@ -127,7 +127,8 @@ export default function WhySection() {
             <div className="flex flex-row flex-wrap items-center justify-center gap-5">
                 <div className="basis-full md:basis-[48.5%] lg:basis-[23.5%]">
                     <div className="flex flex-col p-5 min-h-[330px] rounded-[37px] bg-[#F3EFEE] shadow-[7px_28px_50px_23px_rgba(0,0,0,0.1)] relative">
-                        <h3 className="text-2xl font-semibold mb-4">Messy Notes?</h3>
+                        <h3 className="text-2xl font-semibold mb-4 hidden lg:block">Messy <br/>Notes?</h3>
+                        <h3 className="text-2xl font-semibold mb-4 lg:hidden">Messy Notes?</h3>
                         <p>
                             Keep your sheet music clean and readable with organized digital annotations.
                         </p>
@@ -150,7 +151,8 @@ export default function WhySection() {
 
                 <div className="basis-full md:basis-[48.5%] lg:basis-[23.5%]">
                     <div className="flex flex-col p-5 min-h-[330px] rounded-[37px] bg-[#F3EFEE] shadow-[7px_28px_50px_23px_rgba(0,0,0,0.1)] relative">
-                        <h3 className="text-2xl font-semibold mb-4">Can’t Find Your Music?</h3>
+                        <h3 className="text-2xl font-semibold mb-4 hidden lg:block">Can’t Find <br /> Your Music?</h3>
+                        <h3 className="text-2xl font-semibold mb-4 lg:hidden">Can’t Find Your Music?</h3>
                         <p>
                             Store all your music in one place so it’s always easy to access.
                         </p>
@@ -172,7 +174,8 @@ export default function WhySection() {
 
                 <div className="basis-full md:basis-[48.5%] lg:basis-[23.5%]">
                     <div className="flex flex-col p-5 min-h-[330px] rounded-[37px] bg-[#F3EFEE] shadow-[7px_28px_50px_23px_rgba(0,0,0,0.1)] relative">
-                        <h3 className="text-2xl font-semibold mb-4">Hard to Work Together?</h3>
+                        <h3 className="text-2xl font-semibold mb-4 hidden lg:block">Hard to <br /> Work Together?</h3>
+                        <h3 className="text-2xl font-semibold mb-4 lg:hidden">Hard to Work Together?</h3>
                         <p>
                             Use shared tools that make it simple for musicians to collaborate.
                         </p>
@@ -189,7 +192,8 @@ export default function WhySection() {
 
                 <div className="basis-full md:basis-[48.5%] lg:basis-[23.5%]">
                     <div className="flex flex-col p-5 min-h-[330px] rounded-[37px] bg-[#F3EFEE] shadow-[7px_28px_50px_23px_rgba(0,0,0,0.1)] relative">
-                        <h3 className="text-2xl font-semibold mb-4">Struggling to Read on Screens?</h3>
+                        <h3 className="text-2xl font-semibold mb-4 hidden lg:block">Struggling to <br /> Read on Screens?</h3>
+                        <h3 className="text-2xl font-semibold mb-4 lg:hidden">Struggling to Read on Screens?</h3>
                         <p>
                             Enjoy clear, readable music on any device with dynamic music rendering.
                         </p>

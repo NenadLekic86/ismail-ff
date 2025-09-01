@@ -8,7 +8,7 @@ export default function Footer() {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-full">
                 <div className="flex flex-row flex-wrap md:flex-nowrap items-start justify-start">
                     <div className="basis-full md:basis-1/4 border border-[#543F3A]/[.07] p-3">
-                        <Image className="mx-auto" src="/logo.svg" alt="logo" width={140} height={51} />
+                        <Image className="mx-auto" src="/MusyncLogoSVG.svg" alt="logo" width={140} height={51} />
                     </div>
                     <div className="basis-full md:basis-4/5">
                         <div className="flex flex-row flex-wrap items-stretch justify-start">
