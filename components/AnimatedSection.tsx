@@ -12,6 +12,7 @@ const isMobile = () => {
   return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 };
 
+
 gsap.registerPlugin(ScrollTrigger);
 
 
@@ -116,7 +117,7 @@ export default function AnimatedSection() {
           trigger: svg,
           start: "top 50%", // begin after user scrolls the SVG into view a bit
           end: "+=200%", // shorter range so it completes within the section
-          scrub: mobile ? 2.5 : 0.6, // faster stop on desktop, slower scrub on mobile
+          scrub: mobile ? 3.75 : 0.6, // 50% slower scrub on mobile (2.5 * 1.5)
           invalidateOnRefresh: true,
         },
       });
@@ -125,7 +126,7 @@ export default function AnimatedSection() {
       paths.forEach((path) => {
         const isVector3Segment = path.id.startsWith("Vector_3_");
         const baseDuration = isVector3Segment ? 0.16 : 0.32;
-        const segDuration = mobile ? baseDuration * 1.8 : baseDuration; // 80% slower on mobile
+        const segDuration = mobile ? baseDuration * 2.7 : baseDuration; // 170% slower on mobile (original 80% + additional 50%)
         tl.to(path, { strokeDashoffset: 0, duration: segDuration, ease: "none" });
       });
 
@@ -133,7 +134,7 @@ export default function AnimatedSection() {
       if (g2Element) {
         gsap.to(g2Element, {
           opacity: 1,
-          duration: mobile ? 5 : 3, // slower fade-in on mobile
+          duration: mobile ? 7.5 : 3, // 50% slower fade-in on mobile (5 * 1.5)
           ease: "power1.out",
           scrollTrigger: {
             trigger: svg,
@@ -153,18 +154,27 @@ export default function AnimatedSection() {
   useEffect(() => {
     const ids = ["illustration1", "illustration2", "illustration3", "illustration4", "illustration5"] as const;
 
-    const initPathDash = (path: SVGPathElement) => {
+    const initPathDash = (path: SVGPathElement, svgId: string) => {
       const length = path.getTotalLength();
       path.style.strokeDasharray = `${length}`;
       const p0 = path.getPointAtLength(0);
       const p1 = path.getPointAtLength(length);
       const epsilon = 4;
       let startFromStart = true;
-      if (Math.abs(p0.y - p1.y) <= epsilon) {
-        startFromStart = p0.x <= p1.x; // tie-break toward left-most
+      
+      // Special handling for illustration1 on all devices
+      if (svgId === 'illustration1') {
+        // Force consistent direction for illustration1 - always start from the end (bottom to top)
+        startFromStart = false;
       } else {
-        startFromStart = p0.y < p1.y; // draw from visually top-most endpoint
+        // Original logic for all other illustrations
+        if (Math.abs(p0.y - p1.y) <= epsilon) {
+          startFromStart = p0.x <= p1.x; // tie-break toward left-most
+        } else {
+          startFromStart = p0.y < p1.y; // draw from visually top-most endpoint
+        }
       }
+      
       path.style.strokeDashoffset = startFromStart ? `${length}` : `${-length}`;
       path.style.visibility = "visible";
     };
@@ -183,7 +193,7 @@ export default function AnimatedSection() {
         if (svgPaths.length === 0) return;
 
         // Prepare paths for draw animation and ensure top-to-bottom order where applicable
-        svgPaths.forEach(initPathDash);
+        svgPaths.forEach(path => initPathDash(path, id));
         const ordered = svgPaths
           .map((p) => ({ p, y: p.getBBox().y }))
           .sort((a, b) => a.y - b.y)
@@ -197,7 +207,7 @@ export default function AnimatedSection() {
           paused: true,
         });
         ordered.forEach((path) => {
-          tl.to(path, { strokeDashoffset: 0, duration: 2.5, ease: "none" }); // much slower on mobile
+          tl.to(path, { strokeDashoffset: 0, duration: 3.75, ease: "none" }); // 50% slower on mobile (2.5 * 1.5)
         });
 
         // If this is the mobile SVG that contains the additional masked group, fade it in on viewport entry
@@ -207,7 +217,7 @@ export default function AnimatedSection() {
             maskedGroup.style.opacity = "0";
             gsap.to(maskedGroup, {
               opacity: 1,
-              duration: 6, // slower fade-in for mobile illustrations
+              duration: 9, // 50% slower fade-in for mobile illustrations (6 * 1.5)
               ease: "power1.out",
               scrollTrigger: {
                 trigger: svg,
@@ -320,7 +330,7 @@ export default function AnimatedSection() {
             </div>
         </div>
 
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 my-20 lg:my-44 xl:my-64 relative">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 my-20 lg:my-44 xl:my-80 relative">
             <div className="flex flex-col lg:flex-row align-center">
                 <div className="basis-full lg:basis-3/5 order-2 lg:order-1">
                     <h2 className="text-4xl md:text-5xl font-semibold mb-4 hidden lg:block">
@@ -370,7 +380,7 @@ export default function AnimatedSection() {
             </div>
         </div>
 
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 my-20 lg:my-44 xl:my-64 relative">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 my-20 lg:my-44 xl:my-80 relative">
             <div className="flex flex-col lg:flex-row align-center">
                 <div className="basis-full lg:basis-3/5 order-2 lg:order-1">
                     <h2 className="text-4xl md:text-5xl font-semibold mb-4 hidden lg:block">

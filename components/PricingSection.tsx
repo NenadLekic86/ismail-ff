@@ -81,39 +81,11 @@ export default function PricingSection() {
         };
     }, [activePlan]);
 
-    // Always reset to premium on mobile view (changed from basic to premium)
+    // Only set to premium on initial component mount (page refresh)
     useEffect(() => {
-        const handleResize = () => {
-            // Always reset to premium regardless of screen size
-            if (activePlan !== "premium") {
-                setActivePlan("premium");
-            }
-        };
-        
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, [activePlan]);
-
-    // Reset to premium when section comes into view or on page load
-    useEffect(() => {
-        // Always start with premium on component mount (page refresh)
+        // Only start with premium on component mount (page refresh)
+        // This will only run once when the component is first mounted
         setActivePlan("premium");
-
-        // Create ScrollTrigger to reset to premium when section comes into view
-        const scrollTrigger = ScrollTrigger.create({
-            trigger: ".pricing-section",
-            start: "top 80%",
-            onEnter: () => {
-                setActivePlan("premium");
-            },
-            onEnterBack: () => {
-                setActivePlan("premium");
-            },
-        });
-
-        return () => {
-            scrollTrigger.kill();
-        };
     }, []); // Empty dependency array - only run once on mount
 
     const Row = ({ label, value, isCheck, isUncheck }: { label: string; value?: string; isCheck?: boolean; isUncheck?: boolean }) => (
@@ -159,12 +131,12 @@ export default function PricingSection() {
                                     <h3 className={`text-2xl mb-4 pb-2 border-b border-[#543F3A] plan_type ${activePlan === "basic" ? "font-bold" : "font-medium"}`}>Basic</h3>
                                     <p className="text-base mb-4 min-h-[24px]">5 score limit</p>
                                     <p className="text-[18px] mb-4 min-h-[24px]">1</p>
-                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
-                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
-                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/uncheck-icon.svg" alt="check" width={20} height={20} /></p>
-                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/uncheck-icon.svg" alt="check" width={20} height={20} /></p>
-                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/uncheck-icon.svg" alt="check" width={20} height={20} /></p>
-                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/uncheck-icon.svg" alt="check" width={20} height={20} /></p>
+                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto min-h-[24px]" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
+                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto min-h-[24px]" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
+                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto min-h-[24px] opacity-50" src="/uncheck-icon.svg" alt="check" width={20} height={20} /></p>
+                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto min-h-[24px] opacity-50" src="/uncheck-icon.svg" alt="check" width={20} height={20} /></p>
+                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto min-h-[24px] opacity-50" src="/uncheck-icon.svg" alt="check" width={20} height={20} /></p>
+                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto min-h-[24px] opacity-50" src="/uncheck-icon.svg" alt="check" width={20} height={20} /></p>
                                 </div>
                             </div>
                         </div>
@@ -175,12 +147,12 @@ export default function PricingSection() {
                                     <h3 className={`text-2xl mb-4 pb-2 border-b border-[#543F3A] plan_type ${activePlan === "premium" ? "font-bold" : "font-medium"}`}>Premium</h3>
                                     <p className="text-base mb-4 min-h-[24px]">50</p>
                                     <p className="text-base mb-4 min-h-[24px]">Unlimited</p>
-                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
-                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
+                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto min-h-[24px]" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
+                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto min-h-[24px]" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
                                     <p className="text-base mb-4 min-h-[24px]">5</p>
-                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
-                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
-                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
+                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto min-h-[24px]" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
+                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto min-h-[24px]" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
+                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto min-h-[24px]" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
                                 </div>
                             </div>
                         </div>
@@ -191,12 +163,12 @@ export default function PricingSection() {
                                     <h3 className={`text-2xl mb-4 pb-2 border-b border-[#543F3A] plan_type ${activePlan === "professional" ? "font-bold" : "font-medium"}`}>Professional</h3>
                                     <p className="text-base mb-4 min-h-[24px]">200</p>
                                     <p className="text-base mb-4 min-h-[24px]">Unlimited</p>
-                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
-                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
+                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto min-h-[24px]" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
+                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto min-h-[24px]" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
                                     <p className="text-base mb-4 min-h-[24px]">Unlimited</p>
-                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
-                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
-                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
+                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto min-h-[24px]" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
+                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto min-h-[24px]" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
+                                    <p className="text-base mb-4 min-h-[24px]"><Image className="mx-auto min-h-[24px]" src="/check-icon.svg" alt="check" width={20} height={20} /></p>
                                 </div>
                             </div>
                         </div>

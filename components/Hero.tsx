@@ -177,7 +177,7 @@ export default function Hero() {
                         </div>
                         <div className="flex flex-row items-center gap-3 pt-80 lg:hidden justify-center">
                             <Link href="/" className="w-52">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="208" height="93" viewBox="0 0 364 91" fill="none" className="w-full h-auto">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="208" height="93" viewBox="0 0 364 91" fill="none" className="w-full h-auto max-w-[80%] sm:max-w-full ml-auto sm:ml-0">
                                     <g clipPath="url(#clip0_290_164)">
                                     <rect y="0.782471" width="364" height="85" rx="30" fill="url(#paint0_linear_290_164)"/>
                                     <rect x="18" y="1.78247" width="332" height="23" rx="11.5" fill="url(#paint1_linear_290_164)" fillOpacity="0.8"/>
@@ -234,7 +234,7 @@ export default function Hero() {
                                 </svg>
                             </Link>
                             <Link href="/" className="w-52">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="208" height="93" viewBox="0 0 364 91" fill="none" className="w-full h-auto">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="208" height="93" viewBox="0 0 364 91" fill="none" className="w-full h-auto max-w-[80%] sm:max-w-full">
                                     <g clipPath="url(#clip0_290_195)">
                                     <rect y="0.782471" width="364" height="85" rx="30" fill="url(#paint0_linear_290_195)"/>
                                     <rect x="18" y="1.78247" width="332" height="23" rx="11.5" fill="url(#paint1_linear_290_195)" fillOpacity="0.8"/>
