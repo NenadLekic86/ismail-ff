@@ -12,6 +12,14 @@ const isMobile = () => {
   return window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 };
 
+// iOS mobile device detection utility (specifically for actual iOS devices, not desktop Safari)
+const isIOSMobile = () => {
+  if (typeof window === 'undefined') return false;
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const isMobileWidth = window.innerWidth <= 768;
+  return isIOS && isMobileWidth;
+};
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -162,10 +170,14 @@ export default function AnimatedSection() {
       const epsilon = 4;
       let startFromStart = true;
       
-      // Special handling for illustration1 on all devices
+      // Special handling for illustration1
       if (svgId === 'illustration1') {
-        // Force consistent direction for illustration1 - always start from the end (bottom to top)
-        startFromStart = false;
+        // iOS mobile devices need opposite direction due to Safari quirks
+        if (isIOSMobile()) {
+          startFromStart = true; // Reverse direction for iOS mobile only
+        } else {
+          startFromStart = false; // Normal direction for all other devices
+        }
       } else {
         // Original logic for all other illustrations
         if (Math.abs(p0.y - p1.y) <= epsilon) {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Button } from "./Buttons";
@@ -9,6 +9,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function ContactSection() {
     const violinRef = useRef<SVGSVGElement | null>(null);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
         const svg = violinRef.current;
@@ -68,6 +71,47 @@ export default function ContactSection() {
 
         return () => ctx.revert();
     }, []);
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setSubmitStatus('idle');
+        setErrorMessage('');
+
+        const formData = new FormData(e.currentTarget);
+        const data = {
+            name: formData.get('name') as string,
+            email: formData.get('email') as string,
+            phone: formData.get('phone') as string,
+            message: formData.get('message') as string,
+        };
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                setSubmitStatus('success');
+                // Reset form
+                (e.target as HTMLFormElement).reset();
+            } else {
+                setSubmitStatus('error');
+                setErrorMessage(result.error || 'Failed to send message. Please try again.');
+            }
+        } catch {
+            setSubmitStatus('error');
+            setErrorMessage('Network error. Please check your connection and try again.');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
     return (
         <section className="contact-section mx-auto max-w-6xl px-4 sm:px-6 my-20 lg:my-44 relative">
             <div className="contact-section-title max-w-xl mx-auto mb-10">
@@ -83,7 +127,7 @@ export default function ContactSection() {
                         </svg>
                     </div>
                     <div className="basis-full md:basis-4/5 order-1 md:order-2 mb-10 md:mb-0">
-                        <form action="" className="w-full">
+                        <form onSubmit={handleSubmit} className="w-full">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <input
@@ -118,8 +162,26 @@ export default function ContactSection() {
                                     />
                                 </div>
                             </div>
+                            {/* Status Messages */}
+                            {submitStatus === 'success' && (
+                                <div className="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg">
+                                    ✅ Your message has been sent successfully! We&apos;ll get back to you soon.
+                                </div>
+                            )}
+                            {submitStatus === 'error' && (
+                                <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                                    ❌ {errorMessage}
+                                </div>
+                            )}
+                            
                             <div className="flex justify-center mt-6">
-                                <Button className="min-w-[149px] cursor-pointer" type="submit">Send</Button>
+                                <Button 
+                                    className="min-w-[149px] cursor-pointer" 
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                >
+                                    {isSubmitting ? 'Sending...' : 'Send'}
+                                </Button>
                             </div>
                         </form>
                     </div>

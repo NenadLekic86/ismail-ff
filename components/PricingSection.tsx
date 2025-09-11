@@ -94,9 +94,9 @@ export default function PricingSection() {
             {typeof value === "string" ? (
                 <span className="text-base font-medium">{value}</span>
             ) : isCheck ? (
-                <Image src="/check-icon.svg" alt="check" width={20} height={20} />
+                <Image className="min-h-[24px]" src="/check-icon.svg" alt="check" width={20} height={20} />
             ) : isUncheck ? (
-                <Image src="/uncheck-icon.svg" alt="uncheck" width={20} height={20} />
+                <Image className="min-h-[24px] opacity-50" src="/uncheck-icon.svg" alt="uncheck" width={20} height={20} />
             ) : null}
         </div>
     );
