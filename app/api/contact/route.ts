@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Client } from 'postmark';
 
-// Initialize Postmark client with your server token
-const client = new Client(process.env.POSTMARK_SERVER_TOKEN || 'fa865ac3-053d-4ac4-87bb-3e2361629e90');
+// Initialize Postmark client - MUST use environment variable for security
+const client = new Client(process.env.POSTMARK_SERVER_TOKEN as string);
+
+if (!process.env.POSTMARK_SERVER_TOKEN) {
+  throw new Error('POSTMARK_SERVER_TOKEN environment variable is required');
+}
 
 export async function POST(request: NextRequest) {
   try {
