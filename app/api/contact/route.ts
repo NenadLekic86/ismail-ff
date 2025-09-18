@@ -2,14 +2,21 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Client } from 'postmark';
 
 // Initialize Postmark client - MUST use environment variable for security
-const client = new Client(process.env.POSTMARK_SERVER_TOKEN as string);
-
-if (!process.env.POSTMARK_SERVER_TOKEN) {
-  throw new Error('POSTMARK_SERVER_TOKEN environment variable is required');
-}
+// Note: Client initialization is moved inside the POST handler to avoid build-time errors
 
 export async function POST(request: NextRequest) {
   try {
+    // Initialize Postmark client inside handler to avoid build-time errors
+    if (!process.env.POSTMARK_SERVER_TOKEN) {
+      console.error('POSTMARK_SERVER_TOKEN environment variable is required');
+      return NextResponse.json(
+        { error: 'Email service is not configured. Please contact support.' },
+        { status: 500 }
+      );
+    }
+
+    const client = new Client(process.env.POSTMARK_SERVER_TOKEN);
+    
     const body = await request.json();
     const { name, email, phone, message } = body;
 
