@@ -20,6 +20,32 @@ const isIOSMobile = () => {
   return isIOS && isMobileWidth;
 };
 
+// Desktop Safari detection utility
+const isSafariDesktop = () => {
+  if (typeof window === 'undefined') return false;
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const isDesktop = window.innerWidth > 768;
+  return isSafari && isDesktop;
+};
+
+// macOS detection utility
+const isMacOS = () => {
+  if (typeof window === 'undefined') return false;
+  return navigator.platform.toUpperCase().indexOf('MAC') >= 0 || navigator.userAgent.includes('Macintosh');
+};
+
+// Android detection utility (including both mobile and desktop Android)
+const isAndroid = () => {
+  if (typeof window === 'undefined') return false;
+  return /Android/i.test(navigator.userAgent);
+};
+
+// Windows detection utility
+const isWindows = () => {
+  if (typeof window === 'undefined') return false;
+  return navigator.platform.toUpperCase().indexOf('WIN') >= 0 || navigator.userAgent.includes('Windows');
+};
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -119,11 +145,30 @@ export default function AnimatedSection() {
 
     const ctx = gsap.context(() => {
       const mobile = isMobile();
+      const safariDesktop = isSafariDesktop();
+      const macOS = isMacOS();
+      const android = isAndroid();
+      const windows = isWindows();
+      
+      // Adjust start position for better experience across different devices/browsers
+      let startPosition = "top 40%"; // default for mobile
+      if (!mobile) {
+        if (safariDesktop || macOS) {
+          startPosition = "top 20%"; // Start later for Safari/macOS desktop users
+        } else if (windows) {
+          startPosition = "top 50%"; // Start later for Windows desktop users (balanced timing)
+        } else {
+          startPosition = "top 50%"; // Start later for other desktop browsers
+        }
+      } else if (android) {
+        startPosition = "top 50%"; // Start later for Android mobile devices
+      }
+      
       const tl = gsap.timeline({
         defaults: { ease: "none" },
         scrollTrigger: {
           trigger: svg,
-          start: "top 50%", // begin after user scrolls the SVG into view a bit
+          start: startPosition,
           end: "+=200%", // shorter range so it completes within the section
           scrub: mobile ? 3.75 : 0.6, // 50% slower scrub on mobile (2.5 * 1.5)
           invalidateOnRefresh: true,
@@ -138,15 +183,29 @@ export default function AnimatedSection() {
         tl.to(path, { strokeDashoffset: 0, duration: segDuration, ease: "none" });
       });
 
-      // Reveal the additional element as soon as the SVG enters viewport
+      // Reveal the additional element with improved timing for desktop
       if (g2Element) {
+        // Adjust start position for g2Element based on device/browser
+        let g2StartPosition = "top 65%"; // default for mobile
+        if (!mobile) {
+          if (safariDesktop || macOS) {
+            g2StartPosition = "top 45%"; // Start later for Safari/macOS desktop users
+          } else if (windows) {
+            g2StartPosition = "top 40%"; // Start even later for Windows desktop users
+          } else {
+            g2StartPosition = "top 45%"; // Start later for other desktop browsers
+          }
+        } else if (android) {
+          g2StartPosition = "top 55%"; // Start later for Android mobile devices
+        }
+        
         gsap.to(g2Element, {
           opacity: 1,
           duration: mobile ? 7.5 : 3, // 50% slower fade-in on mobile (5 * 1.5)
           ease: "power1.out",
           scrollTrigger: {
             trigger: svg,
-            start: "top 65%",
+            start: g2StartPosition,
             once: true,
           },
         });
