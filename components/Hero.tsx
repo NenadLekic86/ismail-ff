@@ -16,7 +16,7 @@ export default function Hero() {
             return { ...data, fr: data.fr * 0.5 } as Record<string, unknown>;
         }
         return data as Record<string, unknown>;
-    }, []);
+    }, []); 
     const LOOP_START = 120;
     const LOOP_END = 240;
     const [desktopSegmentLoop, setDesktopSegmentLoop] = useState(false);
