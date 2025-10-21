@@ -10,6 +10,16 @@
   --color-foreground: var(--foreground);
   --font-sans: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  
+  /* Custom breakpoint for extra large screens */
+  --breakpoint-3xl: 105rem;
+  --breakpoint-4xl: 115rem;
+  
+  /* Custom spacing values */
+  --spacing-50: 12.5rem;
+  --spacing-70: 13.5rem;
+  --spacing-80: 17rem;
+  --spacing-90: 27rem;
 }
 
 @media (prefers-color-scheme: dark) {
