@@ -121,7 +121,7 @@ export default function WhySection() {
     }, []);
 
     return (
-        <section className="why-section mx-auto max-w-7xl px-4 sm:px-6 my-20 lg:my-40 xl:mt-80 xl:mb-48 relative">
+        <section className="why-section mx-auto max-w-7xl px-4 sm:px-6 my-20 lg:my-60 relative">
             <h2 className="text-4xl md:text-5xl font-semibold text-center mb-10">Why Musync?</h2>
             
             <div className="flex flex-row flex-wrap items-center justify-center gap-5">

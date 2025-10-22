@@ -349,7 +349,7 @@ export default function AnimatedSection() {
             </div>
         </div>
 
-        <div className="max-w-screen-2xl mx-auto px-6 md:px-36 lg:py-16 xl:py-52 2xl:py-70 3xl:py-80 4xl:py-90 relative z-[1]">
+        <div className="max-w-screen-2xl mx-auto px-6 md:px-36 lg:pt-16 xl:pt-52 2xl:pt-70 3xl:pt-80 4xl:pt-90 relative z-[1]">
             <div className="flex flex-col lg:flex-row items-center">
                 <div className="basis-full lg:basis-3/5">
                     <h2 className="sm:text-2xl lg:text-4xl xl:text-5xl font-semibold  lg:hidden">
