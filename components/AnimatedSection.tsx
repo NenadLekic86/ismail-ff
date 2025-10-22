@@ -34,6 +34,8 @@ export default function AnimatedSection() {
 
   // Refs for each Lottie animation
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const bigAnimRef = useRef<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const lottie1Ref = useRef<any>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const lottie2Ref = useRef<any>(null);
@@ -45,6 +47,7 @@ export default function AnimatedSection() {
   const lottie5Ref = useRef<any>(null);
 
   // Container refs for intersection observer
+  const sectionRef = useRef<HTMLDivElement>(null);
   const container1Ref = useRef<HTMLDivElement>(null);
   const container2Ref = useRef<HTMLDivElement>(null);
   const container3Ref = useRef<HTMLDivElement>(null);
@@ -65,12 +68,46 @@ export default function AnimatedSection() {
   
   // State to track if big background animation should loop
   const [bigAnimLooping, setBigAnimLooping] = useState(false);
+  
+  // State to track if section is in viewport (to trigger big animation)
+  const [sectionInView, setSectionInView] = useState(false);
 
+  // Observer for section visibility (triggers big background animation)
+  useEffect(() => {
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !sectionInView) {
+            setSectionInView(true);
+            // Trigger animation play
+            if (bigAnimRef.current && !bigAnimLooping) {
+              bigAnimRef.current.play();
+            }
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1, // Trigger when 10% of section is visible
+      }
+    );
+
+    if (sectionRef.current) {
+      sectionObserver.observe(sectionRef.current);
+    }
+
+    return () => {
+      sectionObserver.disconnect();
+    };
+  }, [sectionInView, bigAnimLooping]);
+
+  // Observer for individual mobile/tablet animations
   useEffect(() => {
     const observerOptions = {
       root: null,
       rootMargin: '0px',
-      threshold: 0.7, // Trigger when 70% of the element is visible
+      threshold: 0.4, // Trigger when 40% of the element is visible
     };
 
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
@@ -106,14 +143,15 @@ export default function AnimatedSection() {
   }, [playedAnimations]);
 
   return (
-    <section className="ilustration-wrapper my-30 relative">
+    <section ref={sectionRef} className="ilustration-wrapper my-30 relative">
         {/* Big background Lottie animation - Desktop only (xl and up) */}
         <div className="hidden lg:block absolute lg:-top-[180px] xl:-top-[230px] -left-[50px] w-full h-auto pointer-events-none z-[0]">
           {!bigAnimLooping ? (
             <Lottie 
+              lottieRef={bigAnimRef}
               animationData={OneBigAnim}
               loop={false}
-              autoplay={true}
+              autoplay={false}
               initialSegment={[0, BIG_ANIM_LOOP_END]}
               onComplete={() => setBigAnimLooping(true)}
               className="w-full h-auto"
