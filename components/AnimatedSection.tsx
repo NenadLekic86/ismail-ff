@@ -193,9 +193,9 @@ export default function AnimatedSection() {
   }, [playedAnimations, currentMaxFrame, bigAnimLooping, bigAnimInitialized, lastSectionTime, lastSectionIndex]);
 
   return (
-    <section ref={sectionRef} className="ilustration-wrapper my-30 relative">
+    <section ref={sectionRef} className="ilustration-wrapper my-30 w-full relative">
         {/* Big background Lottie animation - Desktop only (lg and up) */}
-        <div className="hidden lg:block absolute lg:-top-[180px] xl:-top-[230px] -left-[50px] w-full h-auto pointer-events-none z-[0]">
+        <div className="hidden lg:block absolute lg:-top-[180px] xl:-top-[230px] -left-[50px] w-full h-auto pointer-events-none z-[0] big-animation-holder">
           {!bigAnimLooping ? (
             <Lottie 
               lottieRef={bigAnimRef}
@@ -221,7 +221,7 @@ export default function AnimatedSection() {
           )}
         </div>
 
-        <div className="max-w-screen-2xl mx-auto px-6 md:px-36 relative z-[1] custom-pb1">
+        <div className="max-w-screen-2xl mx-auto px-6 xl:px-36 relative z-[1] custom-pb1">
             {/* Trigger point for section 1 - always present for intersection observer */}
             <div ref={container1Ref} data-animation-index="1" className="absolute top-0 left-0 w-full h-px pointer-events-none" />
             <div className="flex flex-col lg:flex-row items-center">
@@ -265,7 +265,7 @@ export default function AnimatedSection() {
             </div>
         </div>
 
-        <div className="max-w-screen-2xl mx-auto px-6 md:px-36 relative z-[1] custom-pb2">
+        <div className="max-w-screen-2xl mx-auto px-6 xl:px-36 relative z-[1] custom-pb2">
             {/* Trigger point for section 2 - always present for intersection observer */}
             <div ref={container2Ref} data-animation-index="2" className="absolute top-0 left-0 w-full h-px pointer-events-none" />
             <div className="flex flex-col-reverse lg:flex-row items-center">
@@ -316,7 +316,7 @@ export default function AnimatedSection() {
             </div>
         </div>
 
-        <div className="max-w-screen-2xl mx-auto px-6 md:px-36 relative z-[1] custom-pb3">
+        <div className="max-w-screen-2xl mx-auto px-6 xl:px-36 relative z-[1] custom-pb3">
             {/* Trigger point for section 3 - always present for intersection observer */}
             <div ref={container3Ref} data-animation-index="3" className="absolute top-0 left-0 w-full h-px pointer-events-none" />
             <div className="flex flex-col lg:flex-row items-center">
@@ -360,7 +360,7 @@ export default function AnimatedSection() {
             </div>
         </div>
 
-        <div className="max-w-screen-2xl mx-auto px-6 md:px-36 relative z-[1] custom-pb4">
+        <div className="max-w-screen-2xl mx-auto px-6 xl:px-36 relative z-[1] custom-pb4">
             {/* Trigger point for section 4 - always present for intersection observer */}
             <div ref={container4Ref} data-animation-index="4" className="absolute top-0 left-0 w-full h-px pointer-events-none" />
             <div className="flex flex-col-reverse lg:flex-row items-center">
@@ -411,7 +411,7 @@ export default function AnimatedSection() {
             </div>
         </div>
 
-        <div className="max-w-screen-2xl mx-auto px-6 md:px-36 relative z-[1]">
+        <div className="max-w-screen-2xl mx-auto px-6 xl:px-36 relative z-[1]">
             {/* Trigger point for section 5 - always present for intersection observer */}
             <div ref={container5Ref} data-animation-index="5" className="absolute top-0 left-0 w-full h-px pointer-events-none" />
             <div className="flex flex-col lg:flex-row items-center">
