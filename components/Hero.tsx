@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useMemo, useState } from "react";
@@ -175,7 +174,7 @@ export default function Hero() {
                                 />
                             )}
                         </div>
-                        <div className="flex flex-row items-center gap-3 pt-80 lg:hidden justify-center">
+                        <div className="flex flex-row items-center gap-3 pt-[25rem] lg:hidden justify-center">
                             <Link href="/" className="w-72">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="208" height="93" viewBox="0 0 364 91" fill="none" className="w-full h-auto max-w-full ml-auto sm:ml-0">
                                     <g clipPath="url(#clip0_290_164)">

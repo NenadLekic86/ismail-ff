@@ -81,12 +81,9 @@ export default function PricingSection() {
         };
     }, [activePlan]);
 
-    // Only set to premium on initial component mount (page refresh)
     useEffect(() => {
-        // Only start with premium on component mount (page refresh)
-        // This will only run once when the component is first mounted
         setActivePlan("premium");
-    }, []); // Empty dependency array - only run once on mount
+    }, []);
 
     const Row = ({ label, value, isCheck, isUncheck }: { label: string; value?: string; isCheck?: boolean; isUncheck?: boolean }) => (
         <div className="flex items-center justify-between py-3">

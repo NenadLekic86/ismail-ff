@@ -85,8 +85,6 @@ body {
   top: -420px;
 }
 
-
-
 .testimonial-card-text {
   font-family: "SF Pro Text";
 }
@@ -116,6 +114,41 @@ body {
   border-radius: 44px !important;
 }
 
+/* ===== Custom Padding Bottom Classes - Ordered from smallest to largest ===== */
+
+/* Base: 850px and up */
+@media (min-width: 850px) {
+  .custom-pb1 {
+    padding-bottom: 5rem;
+  }
+  .custom-pb2 {
+    padding-bottom: 10rem;
+  }
+  .custom-pb3 {
+    padding-bottom: 7rem;
+  }
+  .custom-pb4 {
+    padding-bottom: 10rem;
+  }
+}
+
+/* 900px and up */
+@media (min-width: 900px) {
+  .custom-pb1 {
+    padding-bottom: 5rem;
+  }
+  .custom-pb2 {
+    padding-bottom: 15rem;
+  }
+  .custom-pb3 {
+    padding-bottom: 10rem;
+  }
+  .custom-pb4 {
+    padding-bottom: 10rem;
+  }
+}
+
+/* 1024px and up */
 @media (min-width: 1024px) {
   .testimonials-swiper .swiper-slide {
     visibility: hidden;
@@ -131,9 +164,177 @@ body {
   }
 }
 
+/* 1050px and up */
+@media (min-width: 1050px) {
+  .custom-pb1 {
+    padding-bottom: 15rem;
+  }
+  .custom-pb2 {
+    padding-bottom: 15rem;
+  }
+  .custom-pb3 {
+    padding-bottom: 15rem;
+  }
+  .custom-pb4 {
+    padding-bottom: 20rem;
+  }
+}
+
+/* 1280px and up */
+@media (min-width: 1280px) {
+  .custom-pb1 {
+    padding-bottom: 20rem;
+  }
+  .custom-pb2 {
+    padding-bottom: 30rem;
+  }
+  .custom-pb3 {
+    padding-bottom: 25rem;
+  }
+  .custom-pb4 {
+    padding-bottom: 30rem;
+  }
+}
+
+/* 1366px and up */
+@media (min-width: 1366px) {
+  .custom-pb1, .custom-pb2, .custom-pb3, .custom-pb4 {
+    padding-bottom: 21rem;
+  }
+}
+
+/* 1440px and up */
+@media (min-width: 1440px) {
+  .custom-pb1 {
+    padding-bottom: 20rem;
+  }
+  .custom-pb2 {
+    padding-bottom: 25rem;
+  }
+  .custom-pb3 {
+    padding-bottom: 20rem;
+  }
+  .custom-pb4 {
+    padding-bottom: 30rem;
+  }
+}
+
+/* 1680px and up */
+@media (min-width: 1680px) {
+  .custom-pb1 {
+    padding-bottom: 50rem;
+  }
+  .custom-pb2 {
+    padding-bottom: 35rem;
+  }
+  .custom-pb3 {
+    padding-bottom: 30rem;
+  }
+  .custom-pb4 {
+    padding-bottom: 45rem;
+  }
+}
+
 @media (min-width: 1139px) {
   .ilustration-holder {
     top: -380px;
+  }
+}
+
+/* ===== Width + Height Specific Queries (ordered by width, then height) ===== */
+
+/* 1024px wide, max 600px height */
+@media (min-width: 1024px) and (max-height: 600px) {
+  .custom-pb1 {
+    padding-bottom: 5rem;
+  }
+  .custom-pb2 {
+    padding-bottom: 8rem;
+  }
+  .custom-pb3 {
+    padding-bottom: 3rem;
+  }
+  .custom-pb4 {
+    padding-bottom: 10rem;
+  }
+}
+
+@media (min-width: 1024px) and (max-height: 768px) {
+  .custom-pb1 {
+      padding-bottom: 8rem;
+    }
+    .custom-pb2 {
+      padding-bottom: 10rem;
+    }
+    .custom-pb3 {
+      padding-bottom: 13rem;
+    }
+    .custom-pb4 {
+      padding-bottom: 10rem;
+    }
+  }
+
+/* 1080px wide, max 810px height */
+@media (min-width: 1080px) and (max-height: 810px) {
+  .custom-pb1 {
+    padding-bottom: 10rem;
+  }
+  .custom-pb2 {
+    padding-bottom: 15rem;
+  }
+  .custom-pb3 {
+    padding-bottom: 10rem;
+  }
+  .custom-pb4 {
+    padding-bottom: 15rem;
+  }
+}
+
+/* 1138px wide, max 712px height */
+@media (min-width: 1138px) and (max-height: 712px) {
+  .custom-pb1 {
+    padding-bottom: 10rem;
+  }
+  .custom-pb2 {
+    padding-bottom: 15rem;
+  }
+  .custom-pb3 {
+    padding-bottom: 10rem;
+  }
+  .custom-pb4 {
+    padding-bottom: 15rem;
+  }
+}
+
+/* 1180px wide, max 820px height */
+@media (min-width: 1180px) and (max-height: 820px) {
+  .custom-pb1 {
+    padding-bottom: 15rem;
+  }
+  .custom-pb2 {
+    padding-bottom: 15rem;
+  }
+  .custom-pb3 {
+    padding-bottom: 10rem;
+  }
+  .custom-pb4 {
+    padding-bottom: 15rem;
+  }
+}
+
+/* 1280px wide, max 800px height */
+@media (min-width: 1280px) and (max-height: 800px) {
+  .custom-pb1 {
+    padding-bottom: 13rem;
+  }
+  .custom-pb2 {
+    padding-bottom: 23rem;
+  }
+  .custom-pb3 {
+    padding-bottom: 13rem;
+  }
+  .custom-pb4 {
+    padding-bottom: 23rem;
   }
 }
 
@@ -170,6 +371,7 @@ body {
     margin-top: 30%;
   }
 }
+
 
 @media (max-width: 768px) {
   .tablet-mobile-view::before {

@@ -87,7 +87,7 @@ export default function VideoLib() {
                     <SwiperSlide>
                         <div className="blog-video-bg relative rounded-xl w-full h-[214px]" style={{ backgroundImage: "url('/video-lib-img1.webp')", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                                <Link href="/"><Image src="/play-btn.svg" alt="Image" width={48} height={48} className=" " /></Link>
+                                <Link href="/"><Image src="/play-btn.svg" alt="Image" width={48} height={48} /></Link>
                             </div>
                         </div>
                         <div className="video-lib-content-desktop-item-text mt-5 mb-2">
@@ -98,7 +98,7 @@ export default function VideoLib() {
                     <SwiperSlide>
                         <div className="blog-video-bg relative rounded-xl w-full h-[214px]" style={{ backgroundImage: "url('/video-lib-img2.webp')", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                                <Link href="/"><Image src="/play-btn.svg" alt="Image" width={48} height={48} className=" " /></Link>
+                                <Link href="/"><Image src="/play-btn.svg" alt="Image" width={48} height={48} /></Link>
                             </div>
                         </div>
                         <div className="video-lib-content-desktop-item-text mt-5 mb-2">
@@ -109,7 +109,7 @@ export default function VideoLib() {
                     <SwiperSlide>
                         <div className="blog-video-bg relative rounded-xl w-full h-[214px]" style={{ backgroundImage: "url('/video-lib-img3.webp')", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                                <Link href="/"><Image src="/play-btn.svg" alt="Image" width={48} height={48} className=" " /></Link>
+                                <Link href="/"><Image src="/play-btn.svg" alt="Image" width={48} height={48} /></Link>
                             </div>
                         </div>
                         <div className="video-lib-content-desktop-item-text mt-5 mb-2">
@@ -120,7 +120,7 @@ export default function VideoLib() {
                     <SwiperSlide>
                         <div className="blog-video-bg relative rounded-xl w-full h-[214px]" style={{ backgroundImage: "url('/video-lib-img4.webp')", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}>
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                                <Link href="/"><Image src="/play-btn.svg" alt="Image" width={48} height={48} className=" " /></Link>
+                                <Link href="/"><Image src="/play-btn.svg" alt="Image" width={48} height={48} /></Link>
                             </div>
                         </div>
                         <div className="video-lib-content-desktop-item-text mt-5 mb-2">

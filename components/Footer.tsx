@@ -62,23 +62,6 @@ export default function Footer() {
                             </div>
                             <div className="basis-1/2 md:basis-1/4 border-r border-l border-b md:border-b-0 border-[#543F3A]/[.07] py-5 md:pb-14 px-3 md:px-8">
                                 <h3 className="text-[18px] md:text-[20px] font-bold mb-4">Pricing</h3>
-                                {/* <ul className="flex flex-col gap-2 mt-2 list-none">
-                                    <li>
-                                        <Link href="/">Music On The Go</Link>
-                                    </li>
-                                    <li>
-                                        <Link href="/">Collaborate</Link>
-                                    </li>
-                                    <li>
-                                        <Link href="/">(Un) sheet Music</Link>
-                                    </li>
-                                    <li>
-                                        <Link href="/">Practice and Perform</Link>
-                                    </li>
-                                    <li>
-                                        <Link href="/">Musync Intelligence</Link>
-                                    </li>
-                                </ul> */}
                             </div>
                         </div>
                     </div>
